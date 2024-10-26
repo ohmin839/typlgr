@@ -1,0 +1,5 @@
+services:
+  node-dev:
+    build:
+      context: .
+      dockerfile: ./docker/node-dev/Dockerfile
