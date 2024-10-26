@@ -1,0 +1,669 @@
+---
+function calcScore(text: string): number {
+    return addScoreDialesis(text,
+            addScoreBreath(text,
+            addScoreAccent(text,
+            addScoreIotaSubscriptum(text))));
+}
+
+function addScoreDialesis(text: string, score=0): number {
+    if (text.includes('"')) {
+        return 4 ** 3 + score;
+    } else {
+        return score;
+    }
+}
+
+function addScoreBreath(text: string, score=0): number {
+    if (text.includes('<')) {
+        return 4 ** 2 * 1 + score;
+    } else if (text.includes('>')) {
+        return 4 ** 2 * 2 + score;
+    } else {
+        return score;
+    }
+}
+
+function addScoreAccent(text: string, score=0): number {
+    if (text.includes("'")) {
+        return 4 ** 1 * 1 + score;
+    } else if (text.includes('\`')) {
+        return 4 ** 1 * 2 + score;
+    } else if (text.includes('~')) {
+        return 4 ** 1 * 3 + score;
+    } else {
+        return score;
+    }
+}
+
+function addScoreIotaSubscriptum(text: string, score=0): number {
+    if (text.includes('|')) {
+        return 1 + score;
+    } else {
+        return score;
+    }
+}
+---
+
+letters := children=letter*
+    .value = string { return this.children.map(l => l.value).join(''); } 
+
+letter :=
+      alphabet
+    | punctuation
+    | anyChar
+
+alphabet :=
+      largeAlpha
+    | largeEpsilon
+    | largeEta
+    | largeIota
+    | largeOmicron
+    | largeUpsilon
+    | largeOmega
+    | largeBeta
+    | largeGamma
+    | largeDelta
+    | largeZeta
+    | largeKappa
+    | largeLambda
+    | largeMu
+    | largeNu
+    | largeXi
+    | largePi
+    | largeRho
+    | largeSigma
+    | largeTau
+    | smallAlpha
+    | smallEpsilon
+    | smallEta
+    | smallIota
+    | smallOmicron
+    | smallUpsilon
+    | smallOmega
+    | smallBeta
+    | smallGamma
+    | smallDelta
+    | smallZeta
+    | smallKappa
+    | smallLambda
+    | smallMu
+    | smallNu
+    | smallXi
+    | smallPi
+    | smallRho
+    | smallSigma
+    | smallTau
+
+largeAlpha := text='[<>]?[\'`~]?A\|?'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  1: return '\u1FBC';
+            case  4: return '\u1FBB';
+            // case  5: return '\uxxxx';
+            case  8: return '\u1FBA';
+            // case  9: return '\uxxxx';
+            // case 12: return '\uxxxx';
+            // case 13: return '\uxxxx';
+            case 16: return '\u1F09';
+            case 17: return '\u1F89';
+            case 20: return '\u1F0D';
+            case 21: return '\u1F8D';
+            case 24: return '\u1F0B';
+            case 25: return '\u1F8B';
+            case 28: return '\u1F0F';
+            case 29: return '\u1F8F';
+            case 32: return '\u1F08';
+            case 33: return '\u1F88';
+            case 36: return '\u1F0C';
+            case 37: return '\u1F8C';
+            case 40: return '\u1F0A';
+            case 41: return '\u1F8A';
+            case 44: return '\u1F0E';
+            case 45: return '\u1F8E';
+            default: return '\u0391';
+        }
+    }
+
+largeEpsilon := text='[<>]?[\'`]?E'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  4: return '\u1FC9';
+            case  8: return '\u1FC8';
+            case 16: return '\u1F19';
+            case 20: return '\u1F1D';
+            case 24: return '\u1F1B';
+            case 32: return '\u1F18';
+            case 36: return '\u1F1C';
+            case 40: return '\u1F1A';
+            default: return '\u0395';
+        }
+    }
+   
+largeEta := text='[<>]?[\'`~]?\^E\|?'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  1: return '\u1FCC';
+            case  4: return '\u1FCB';
+            // case  5: return '\uxxxx';
+            case  8: return '\u1FCA';
+            // case  9: return '\uxxxx';
+            // case 12: return '\uxxxx';
+            // case 13: return '\uxxxx';
+            case 16: return '\u1F29';
+            case 17: return '\u1F99';
+            case 20: return '\u1F2D';
+            case 21: return '\u1F9D';
+            case 24: return '\u1F2B';
+            case 25: return '\u1F9B';
+            case 28: return '\u1F2F';
+            case 29: return '\u1F9F';
+            case 32: return '\u1F28';
+            case 33: return '\u1F98';
+            case 36: return '\u1F2C';
+            case 37: return '\u1F9C';
+            case 40: return '\u1F2A';
+            case 41: return '\u1F9A';
+            case 44: return '\u1F2E';
+            case 45: return '\u1F9E';
+            default: return '\u0397';
+        }
+    }
+
+largeIota := text='[<>"]?[\'`~]?I'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  4: return '\u1FDB';
+            case  8: return '\u1FDA';
+            // case  12: return '\uxxxx';
+            case 16: return '\u1F39';
+            case 20: return '\u1F3D';
+            case 24: return '\u1F3B';
+            case 28: return '\u1F3F';
+            case 32: return '\u1F38';
+            case 36: return '\u1F3C';
+            case 40: return '\u1F3A';
+            case 44: return '\u1F3E';
+            case 64: return '\u03AA';
+            default: return '\u0399';
+        }
+    }
+
+largeOmicron := text='[<>]?[\'`]?O'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  4: return '\u1FF9';
+            case  8: return '\u1FF8';
+            case 16: return '\u1F49';
+            case 20: return '\u1F4D';
+            case 24: return '\u1F4B';
+            case 32: return '\u1F48';
+            case 36: return '\u1F4C';
+            case 40: return '\u1F4A';
+            default: return '\u039F';
+        }
+    }
+
+largeUpsilon := text='[<>"]?[\'`~]?[UY]'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  4: return '\u1FEB';
+            case  8: return '\u1FEA';
+            // case  12: return '\uxxxx';
+            case 16: return '\u1F59';
+            case 20: return '\u1F5D';
+            case 24: return '\u1F5B';
+            case 28: return '\u1F5F';
+            case 64: return '\u03AB';
+            default: return '\u03A5';
+        }
+    }
+
+largeOmega := text='[<>]?[\'`~]?\^O\|?'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  1: return '\u1FFC';
+            case  4: return '\u1FFB';
+            // case  5: return '\uxxxx';
+            case  8: return '\u1FFA';
+            // case  9: return '\uxxxx';
+            // case 12: return '\uxxxx';
+            // case 13: return '\uxxxx';
+            case 16: return '\u1F69';
+            case 17: return '\u1FA9';
+            case 20: return '\u1F6D';
+            case 21: return '\u1FAD';
+            case 24: return '\u1F6B';
+            case 25: return '\u1FAB';
+            case 28: return '\u1F6F';
+            case 29: return '\u1FAF';
+            case 32: return '\u1F68';
+            case 33: return '\u1FA8';
+            case 36: return '\u1F6C';
+            case 37: return '\u1FAC';
+            case 40: return '\u1F6A';
+            case 41: return '\u1FAA';
+            case 44: return '\u1F6E';
+            case 45: return '\u1FAE';
+            default: return '\u03A9';
+        }
+    }
+
+largeBeta := text='B'
+    .value = string {
+        return '\u0392';
+    }
+
+largeGamma := text='G'
+    .value = string {
+        return '\u0393';
+    }
+
+largeDelta := text='D'
+    .value = string {
+        return '\u0394';
+    }
+
+largeZeta := text='Z'
+    .value = string {
+        return '\u0396';
+    }
+
+largeKappa := text='Kh?'
+    .value = string {
+        if (this.text.endsWith('h')) {
+            return '\u03A7';
+        } else {
+            return '\u039A';
+        }
+    }
+
+largeLambda := text='L'
+    .value = string {
+        return '\u039B';
+    }
+
+largeMu := text='M'
+    .value = string {
+        return '\u039C';
+    }
+
+largeNu :=
+      largeNasableGammaGamma
+    | largeNasableGammaKappa
+    | largeNasableGammaXi
+    | largeSingleNu
+
+largeNasableGammaGamma := 'N' suffix=largeGamma
+    .value = string {
+        return '\u0393' + this.suffix.value;
+    }
+
+largeNasableGammaKappa := 'N' suffix=largeKappa
+    .value = string {
+        return '\u0393' + this.suffix.value;
+    }
+
+largeNasableGammaXi := 'N' suffix=largeXi
+    .value = string {
+        return '\u0393' + this.suffix.value;
+    }
+
+largeSingleNu := text='N'
+    .value = string {
+        return '\u039D';
+    }
+
+largeXi := text='X'
+    .value = string {
+        return '\u039E';
+    }
+
+largePi := text='P[hs]?'
+    .value = string {
+        if (this.text.endsWith('h')) {
+            return '\u03A6';
+        } else if (this.text.endsWith('s')) {
+            return '\u03A8';
+        } else {
+            return '\u03A0';
+        }
+    }
+
+largeRho := text='<?R'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case 16: return '\u1FEC';
+            default: return '\u03A1';
+        }
+    }
+
+largeSigma := text='S'
+    .value = string {
+        return '\u03A3';
+    }
+
+largeTau := text='Th?'
+    .value = string {
+        if (this.text.endsWith('h')) {
+            return '\u0398';
+        } else {
+            return '\u03A4';
+        }
+    }
+
+smallAlpha := text='[<>]?[\'`~]?a\|?'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  1: return '\u1FB3';
+            case  4: return '\u1F71';
+            case  5: return '\u1FB4';
+            case  8: return '\u1F70';
+            case  9: return '\u1FB2';
+            case 12: return '\u1FB6';
+            case 13: return '\u1FB7';
+            case 16: return '\u1F01';
+            case 17: return '\u1F81';
+            case 20: return '\u1F05';
+            case 21: return '\u1F85';
+            case 24: return '\u1F03';
+            case 25: return '\u1F83';
+            case 28: return '\u1F07';
+            case 29: return '\u1F87';
+            case 32: return '\u1F00';
+            case 33: return '\u1F80';
+            case 36: return '\u1F04';
+            case 37: return '\u1F84';
+            case 40: return '\u1F02';
+            case 41: return '\u1F82';
+            case 44: return '\u1F06';
+            case 45: return '\u1F86';
+            default: return '\u03B1';
+        }
+    }
+
+smallEpsilon := text='[<>]?[\'`]?e'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  4: return '\u1F73';
+            case  8: return '\u1F72';
+            case 16: return '\u1F11';
+            case 20: return '\u1F15';
+            case 24: return '\u1F13';
+            case 32: return '\u1F10';
+            case 36: return '\u1F14';
+            case 40: return '\u1F12';
+            default: return '\u03B5';
+        }
+    }
+
+smallEta := text='[<>]?[\'`~]?\^e\|?'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  1: return '\u1FC3';
+            case  4: return '\u1F75';
+            case  5: return '\u1FC4';
+            case  8: return '\u1F74';
+            case  9: return '\u1FC2';
+            case 12: return '\u1FC6';
+            case 13: return '\u1FC7';
+            case 16: return '\u1F21';
+            case 17: return '\u1F91';
+            case 20: return '\u1F25';
+            case 21: return '\u1F95';
+            case 24: return '\u1F23';
+            case 25: return '\u1F93';
+            case 28: return '\u1F27';
+            case 29: return '\u1F97';
+            case 32: return '\u1F20';
+            case 33: return '\u1F90';
+            case 36: return '\u1F24';
+            case 37: return '\u1F94';
+            case 40: return '\u1F22';
+            case 41: return '\u1F92';
+            case 44: return '\u1F26';
+            case 45: return '\u1F96';
+            default: return '\u03B7';
+        }
+    }
+
+smallIota := text='[<>"]?[\'`~]?i'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  4: return '\u1F77';
+            case  8: return '\u1F76';
+            case 12: return '\u1FD6';
+            case 16: return '\u1F31';
+            case 20: return '\u1F35';
+            case 24: return '\u1F33';
+            case 28: return '\u1F37';
+            case 32: return '\u1F30';
+            case 36: return '\u1F34';
+            case 40: return '\u1F32';
+            case 44: return '\u1F36';
+            case 64: return '\u03CA';
+            case 68: return '\u1FD3';
+            case 72: return '\u1FD2';
+            case 76: return '\u1FD7';
+            default: return '\u03B9';
+        }
+    }
+
+smallOmicron := text='[<>]?[\'`]?o'
+    .value = string {
+    let score = calcScore(this.text);
+        switch (score) {
+            case  4: return '\u1F79';
+            case  8: return '\u1F78';
+            case 16: return '\u1F41';
+            case 20: return '\u1F45';
+            case 24: return '\u1F43';
+            case 32: return '\u1F40';
+            case 36: return '\u1F44';
+            case 40: return '\u1F42';
+            default: return '\u03BF';
+        }
+    }
+
+smallUpsilon := text='[<>"]?[\'`~]?[uy]'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case  4: return '\u1F7B';
+            case  8: return '\u1F7A';
+            case 12: return '\u1FE6';
+            case 16: return '\u1F51';
+            case 20: return '\u1F55';
+            case 24: return '\u1F53';
+            case 28: return '\u1F57';
+            case 32: return '\u1F50';
+            case 36: return '\u1F54';
+            case 40: return '\u1F52';
+            case 44: return '\u1F56';
+            case 64: return '\u03CB';
+            case 68: return '\u1FE3';
+            case 72: return '\u1FE2';
+            case 76: return '\u1FE7';
+            default: return '\u03C5';
+        }
+    }
+
+smallOmega := text='[<>]?[\'`~]?\^o\|?'
+    .value = string {
+        let score  = calcScore(this.text);
+        switch (score) {
+            case  1: return '\u1FF3';
+            case  4: return '\u1F7D';
+            case  5: return '\u1FF4';
+            case  8: return '\u1F7C';
+            case  9: return '\u1FF2';
+            case 12: return '\u1FF6';
+            case 13: return '\u1FF7';
+            case 16: return '\u1F61';
+            case 17: return '\u1FA1';
+            case 20: return '\u1F65';
+            case 21: return '\u1FA5';
+            case 24: return '\u1F63';
+            case 25: return '\u1FA3';
+            case 28: return '\u1F67';
+            case 29: return '\u1FA7';
+            case 32: return '\u1F60';
+            case 33: return '\u1FA0';
+            case 36: return '\u1F64';
+            case 37: return '\u1FA4';
+            case 40: return '\u1F62';
+            case 41: return '\u1FA2';
+            case 44: return '\u1F66';
+            case 45: return '\u1FA6';
+            default: return '\u03C9';
+        }
+    }
+
+smallBeta := text='b'
+    .value = string {
+        return '\u03B2';
+    }
+
+smallGamma := text='g'
+    .value = string {
+        return '\u03B3';
+    }
+
+smallDelta := text='d'
+    .value = string {
+        return '\u03B4';
+    }
+
+smallZeta := text='z'
+    .value = string {
+        return '\u03B6';
+    }
+
+smallKappa := text='kh?'
+    .value = string {
+        if (this.text.endsWith("h")) {
+            return '\u03C7';
+        } else {
+            return '\u03BA';
+        }
+    }
+
+smallLambda := text='l'
+    .value = string {
+        return '\u03BB';
+    }
+
+smallMu := text='m'
+    .value = string {
+        return '\u03BC';
+    }
+
+smallNu :=
+      smallNasableGammaGamma
+    | smallNasableGammaKappa
+    | smallNasableGammaXi
+    | smallSingleNu
+
+smallNasableGammaGamma := 'n' suffix=smallGamma
+    .value = string {
+        return '\u03B3' + this.suffix.value;
+    }
+
+smallNasableGammaKappa := 'n' suffix=smallKappa
+    .value = string {
+        return '\u03B3' + this.suffix.value;
+    }
+
+smallNasableGammaXi := 'n' suffix=smallXi
+    .value = string {
+        return '\u03B3' + this.suffix.value;
+    }
+
+smallSingleNu := text='n'
+    .value = string {
+        return '\u03BD';
+    }
+
+smallXi := text='x'
+    .value = string {
+        return '\u03BE';
+    }
+
+smallPi := text='p[hs]?'
+    .value = string {
+        if (this.text.includes("h")) {
+            return '\u03C6';
+        } else if (this.text.includes("s")) {
+            return '\u03C8';
+        } else {
+            return '\u03C0';
+        }
+    }
+
+smallRho := text='[<>]?r'
+    .value = string {
+        let score = calcScore(this.text);
+        switch (score) {
+            case 16: return '\u1FE5';
+            case 32: return '\u1FE4';
+            default: return '\u03C1';
+        }
+    }
+
+smallSigma :=
+      smallLeadingSigma
+    | smallSingleSigma
+
+smallLeadingSigma := 's' child=alphabet
+    .value = string {
+        return '\u03C3' + this.child.value;
+    }
+
+smallSingleSigma := text='[cs]'
+    .value = string {
+        if (text == "s") {
+            return '\u03C2';
+        } else {
+            return '\u03C3';
+        }
+    }
+
+smallTau := text='th?'
+    .value = string {
+        if (this.text.includes("h")) {
+            return '\u03B8';
+        } else {
+            return '\u03C4';
+        }
+    }
+
+punctuation :=
+      semicoron
+    | question
+
+semicoron := text=';'
+    .value = string {
+        return '\u0387';
+    }
+
+question := text='\?'
+    .value = string {
+        return '\u037E';
+    }
+
+anyChar := text='.'
+    .value = string {
+        return text;
+    }

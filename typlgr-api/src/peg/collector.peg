@@ -1,0 +1,120 @@
+words := children=wordOrNothing*
+    .value = Array<string> {
+        return this.children
+            .map(c => c.value)
+            .filter(c => c != '')
+            ;
+    }
+
+wordOrNothing :=
+      word
+    | anyChar
+
+word := left=alphabetChank right='\''?
+    .value = string {
+        return this.left.value + (this.right ?? '');
+    }
+
+alphabetChank := children=alphabet+
+    .value = string {
+        return this.children.map(c => c.value).join('')
+    }
+
+alphabet :=
+      largeAlpha
+    | largeEpsilon
+    | largeEta
+    | largeIota
+    | largeOmicron
+    | largeUpsilon
+    | largeOmega
+    | largeRho
+    | largeConsonant
+    | smallAlpha
+    | smallEpsilon
+    | smallEta
+    | smallIota
+    | smallOmicron
+    | smallUpsilon
+    | smallOmega
+    | smallRho
+    | smallConsonant
+
+largeAlpha := text='[ΑἈἌᾌἊᾊἎᾎᾈἉἍᾍἋᾋᾋἏᾉΆᾺᾼ]'
+    .value = string {
+        return text;
+    }
+largeEpsilon := text='[ΕἘἜἚἙἝἛΈῈ]'
+    .value = string {
+        return text;
+    }
+largeEta := text='[ΗἨἬᾜἪᾚἮᾞᾘἩἭᾝἫᾛᾛἯᾙΉῊῌ]'
+    .value = string {
+        return text;
+    }
+largeIota := text='[ΙἸἼἺἾἹἽἻἿΊῚΪ]'
+    .value = string {
+        return text;
+    }
+largeOmicron := text='[ΟὈὌὊὉὍὋΌῸ]'
+    .value = string {
+        return text;
+    }
+largeUpsilon := text='[ΥὙὝὛὟΎῪΫ]'
+    .value = string {
+        return text;
+    }
+largeOmega := text='[ΩὨὬᾬὪᾪὮᾮᾨὩὭᾭὫᾫᾫὯᾩΏῺῼ]'
+    .value = string {
+        return text;
+    }
+largeRho := text='[ΡῬ]'
+    .value = string {
+        return text;
+    }
+largeConsonant := text='[ΒΓΔΖΘΚΛΜΝΞΠΣΤΦΧΨ]'
+    .value = string {
+        return text;
+    }
+
+smallAlpha := text='[αἀἄᾄἂᾂἆᾆᾀἁἅᾅἃᾃᾃἇᾁάᾴὰᾲᾶᾷᾳ]'
+    .value = string {
+        return text;
+    }
+smallEpsilon := text='[εἐἔἒἑἕἓέὲ]'
+    .value = string {
+        return text;
+    }
+smallEta := text='[ηἠἤᾔἢᾒἦᾖᾐἡἥᾕἣᾓᾓἧᾑήῄὴῂῆῇῃ]'
+    .value = string {
+        return text;
+    }
+smallIota := text='[ιἰἴἲἶἱἵἳἷίὶῖϊΐῒῗ]'
+    .value = string {
+        return text;
+    }
+smallOmicron := text='[οὀὄὂὁὅὃόὸ]'
+    .value = string {
+        return text;
+    }
+smallUpsilon := text='[υὐὔὒὖὑὕὓὗύὺῦϋΰῢῧ]'
+    .value = string {
+        return text;
+    }
+smallOmega := text='[ωὠὤᾤὢᾢὦᾦᾠὡὥᾥὣᾣᾣὧᾡώῴὼῲῶῷῳ]'
+    .value = string {
+        return text;
+    }
+smallRho := text='[ρῤῥ]'
+    .value = string {
+        return text;
+    }
+smallConsonant := text='[βγδζθκλμνξπσςτφχψ]'
+    .value = string {
+        return text;
+    }
+
+anyChar := text='.'
+    .value = string {
+        return '';
+    }
