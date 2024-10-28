@@ -1,4 +1,0 @@
-#!/bin/bash
-
-mkdir -p $HOME/.local/bin
-npm config set prefix $HOME/.local
