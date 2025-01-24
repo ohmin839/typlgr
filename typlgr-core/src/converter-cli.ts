@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { toPolytonic } from 'typlgr-api';
+import { toPolytonic } from './api.js';
 import readline from 'readline';
 
 let rl = readline.createInterface({

@@ -1,0 +1,30 @@
+{
+  "name": "typlgr-core",
+  "version": "0.1.0",
+  "description": "A tiny processor for texts in polytonic Greek",
+  "type": "module",
+  "main": "dist/api.js",
+  "types": "dist/types/api.d.ts",
+  "scripts": {
+    "genconv": "npx tspeg --regex-flags=s ./src/peg/converter.peg ./src/converter-peg.ts",
+    "gencoll": "npx tspeg ./src/peg/collector.peg ./src/collector-peg.ts",
+    "pretest": "npm run genconv & npm run gencoll",
+    "test": "npx jest --verbose ./test",
+    "preinstall": "npx tsc && tsc --declaration --emitDeclarationOnly --outDir ./dist/types src/api.ts"
+  },
+  "bin": {
+    "typlgrconv": "./dist/converter-cli.js",
+    "typlgrcoll": "./dist/collector-cli.js"
+  },
+  "author": "ohmin839",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.10",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "tspeg": "^3.3.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { toWordsList } from 'typlgr-api';
+import { toWordsList } from './api.js';
 import readline from 'readline';
 
 let rl = readline.createInterface({

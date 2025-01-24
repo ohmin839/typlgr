@@ -3,5 +3,4 @@
 This is a work in progress.
 
 ## Components
-- [`typlgr-api`](./typlgr-api/README.md)
-- [`typlgr-cli`](./typlgr-cli/README.md)
+- [`typlgr-core`](./typlgr-core/README.md)
