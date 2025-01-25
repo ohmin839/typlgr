@@ -1,0 +1,20 @@
+textarea {
+    color: #0a0a0a;
+    background-color: darkcyan;
+    width: 1024px;
+    height: 192px;
+    padding: 2px;
+    resize: none;
+}
+
+#rawText {
+    font-family: 'Consolas';
+}
+
+#convertedText {
+    font-family: 'Palatino';
+}
+
+#collectedWords {
+    font-family: 'Palatino';
+}

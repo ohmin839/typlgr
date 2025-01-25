@@ -10,7 +10,7 @@
     "gencoll": "npx tspeg ./src/peg/collector.peg ./src/collector-peg.ts",
     "pretest": "npm run genconv & npm run gencoll",
     "test": "npx jest --verbose ./test",
-    "preinstall": "npx tsc && tsc --declaration --emitDeclarationOnly --outDir ./dist/types src/api.ts"
+    "preinstall": "npx tsc & npx tsc --declaration --emitDeclarationOnly --outDir ./dist/types src/api.ts"
   },
   "bin": {
     "typlgrconv": "./dist/converter-cli.js",

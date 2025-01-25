@@ -1,0 +1,13 @@
+.tab {
+    padding: 0px 10px
+}
+
+.tab.selected {
+    background-color: #ededed;
+    color: #0a0a0a;
+    text-decoration:underline;
+}
+
+#tabContainer {
+    padding: 5px
+}
