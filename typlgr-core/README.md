@@ -3,14 +3,14 @@
 
 ## API
 - `toPolytonic` function converts ASCII strings into strings in polytonic Greek.
-- `toWordsList` function splits texts in polytonic Greek into words.
+- `toTokenList` function splits texts in polytonic Greek into tokens.
 ```typescript
-import { toPolytonic, toWordsList } from 'typlgr-core';
+import { toPolytonic, toTokenList } from 'typlgr-core';
 
 let converted = toPolytonic("<o >'anthr^op'os tis");
 console.log(converted); // ὁ ἄνθρωπός τις
 
-let split = toWordsList(converted);
+let split = toTokenList(converted);
 console.log(split); // [ 'ὁ', 'ἄνθρωπός', 'τις' ]
 ```
 
@@ -24,9 +24,9 @@ $ echo "<o >'anthr^op'os tis" | typlgrconv
 ```
 
 ### typlgrcoll
-`typlgrcoll` command extracts words uniquely from texts in polytonic Greek.
+`typlgrcoll` command extracts tokens uniquely from texts in polytonic Greek.
 ```bash
-$ cat alpha.txt | typlgrconv | typlgrcoll
+$ head -n1 alpha.txt | typlgrconv | typlgrcoll
 Πάντες
 ἄνθρωποι
 τοῦ
@@ -35,5 +35,4 @@ $ cat alpha.txt | typlgrconv | typlgrcoll
 φύσει
 σημεῖον
 δ'
-...
 ```

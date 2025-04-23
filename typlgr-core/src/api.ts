@@ -4,13 +4,13 @@ function toPolytonic (text: string): string {
     return result.ast?.value ?? '';
 }
 
-import { parse as collector } from './collector-peg.js';
-function toWordsList(text: string): Array<string> {
-    let result = collector(text);
+import { parse as tokenizer } from './tokenizer-peg.js';
+function toTokenList(text: string): Array<string> {
+    let result = tokenizer(text);
     return result.ast?.value ?? [];
 }
 
 export {
     toPolytonic,
-    toWordsList
+    toTokenList,
 };

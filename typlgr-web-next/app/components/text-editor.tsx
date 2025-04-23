@@ -1,29 +1,34 @@
 "use client";
 
-import { toPolytonic, toWordsList } from 'typlgr-core';
+import { toPolytonic, toTokenList } from 'typlgr-core';
 import './text-editor.css';
 
 function toPolytonicOnClick() {
-    let rawTextArea = document.getElementById('rawText') as HTMLTextAreaElement;
-    let rawText = rawTextArea.value;
+    const rawTextArea = document.getElementById('rawText') as HTMLTextAreaElement;
+    const rawText = rawTextArea.value;
 
-    let convertedText = rawText.split(/\r?\n/).map(line => toPolytonic(line)).join('\n');
-    let convertedTextArea = document.getElementById('convertedText') as HTMLTextAreaElement;
+    const convertedText =
+        rawText.split(/\r?\n/)
+            .filter(line => !/^%.*$/.test(line))
+            .map(line => toPolytonic(line))
+            .join('\n');
+
+    const convertedTextArea = document.getElementById('convertedText') as HTMLTextAreaElement;
     convertedTextArea.value = convertedText;
 }
 
-function toWordsSetOnClick() {
-    let convertedTextArea = document.getElementById('convertedText') as HTMLTextAreaElement;
-    let convertedText = convertedTextArea.value;
+function toTokenSetOnClick() {
+    const convertedTextArea = document.getElementById('convertedText') as HTMLTextAreaElement;
+    const convertedText = convertedTextArea.value;
 
-    let wordsSet = new Set<string>();
+    const tokenSet = new Set<string>();
     convertedText.split(/\r?\n/).forEach((line) => {
-        toWordsList(line).forEach((word) => wordsSet.add(word));
+        toTokenList(line).forEach((token) => tokenSet.add(token));
     });
 
-    let collectedWords = [...wordsSet].join('\n');
-    let collectedWordsArea = document.getElementById('collectedWords') as HTMLTextAreaElement;
-    collectedWordsArea.value = collectedWords;
+    const extractedTokens = [...tokenSet].join('\n');
+    const extractedTokensArea = document.getElementById('extractedTokens') as HTMLTextAreaElement;
+    extractedTokensArea.value = extractedTokens;
 }
 
 export default function TextEditor() {
@@ -39,10 +44,10 @@ export default function TextEditor() {
                 <textarea id="convertedText" readOnly></textarea>
             </div>
             <div>
-                <button onClick={toWordsSetOnClick}>▼</button>
+                <button onClick={toTokenSetOnClick}>▼</button>
             </div>
             <div>
-                <textarea id="collectedWords" readOnly></textarea>
+                <textarea id="extractedTokens" readOnly></textarea>
             </div>
         </div>
     )

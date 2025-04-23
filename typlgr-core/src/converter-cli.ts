@@ -8,6 +8,8 @@ let rl = readline.createInterface({
 });
 
 rl.on("line", function(line) {
-    let converted = toPolytonic(line);
-    console.log(converted);
+    if (!/^%.*$/.test(line)) {
+        let converted = toPolytonic(line);
+        console.log(converted);
+    }
 });

@@ -7,14 +7,14 @@
   "types": "dist/types/api.d.ts",
   "scripts": {
     "genconv": "npx tspeg --regex-flags=s ./src/peg/converter.peg ./src/converter-peg.ts",
-    "gencoll": "npx tspeg ./src/peg/collector.peg ./src/collector-peg.ts",
-    "pretest": "npm run genconv & npm run gencoll",
+    "gentknz": "npx tspeg ./src/peg/tokenizer.peg ./src/tokenizer-peg.ts",
+    "pretest": "npm run genconv & npm run gentknz",
     "test": "npx jest --verbose ./test",
     "preinstall": "npx tsc & npx tsc --declaration --emitDeclarationOnly --outDir ./dist/types src/api.ts"
   },
   "bin": {
     "typlgrconv": "./dist/converter-cli.js",
-    "typlgrcoll": "./dist/collector-cli.js"
+    "typlgrtknz": "./dist/tokenizer-cli.js"
   },
   "author": "ohmin839",
   "license": "ISC",
