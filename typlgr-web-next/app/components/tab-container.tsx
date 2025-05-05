@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import TextEditor from './text-editor';
+import MapViewer from './map-viewer';
 
 import './tab-container.css';
 
@@ -15,6 +16,7 @@ export default function TabContainer() {
             </div>
             <div>
                 {tabIndex === 0 && <TextEditor />}
+                {tabIndex === 1 && <MapViewer />}
             </div>
         </div>
     );
