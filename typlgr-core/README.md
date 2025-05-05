@@ -23,16 +23,17 @@ $ echo "<o >'anthr^op'os tis" | typlgrconv
 ὁ ἄνθρωπός τις
 ```
 
-### typlgrcoll
-`typlgrcoll` command extracts tokens uniquely from texts in polytonic Greek.
+### typlgrtknz
+`typlgrtknz` command extracts tokens uniquely from texts in polytonic Greek.
 ```bash
-$ head -n1 alpha.txt | typlgrconv | typlgrcoll
+$ head -n1 alpha.txt | typlgrconv | typlgrtknz
 Πάντες
 ἄνθρωποι
 τοῦ
 εἰδέναι
 ὀρέγονται
 φύσει
+.
 σημεῖον
 δ'
 ```
